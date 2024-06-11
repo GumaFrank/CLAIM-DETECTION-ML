@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Model Report</h1>
+    <pre>{{ report }}</pre>
+    <h2>Confusion Matrix</h2>
+    <img src="{{ confusion_matrix_path }}" alt="Confusion Matrix">
+    <h2>Feature Importance</h2>
+    <img src="{{ feature_importance_path }}" alt="Feature Importance">
+    <h2>Distribution of Fraudulent vs. Non-Fraudulent Claims</h2>
+    <img src="{{ distribution_path }}" alt="Distribution of Claims">
+</body>
+</html>

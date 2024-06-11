@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .top-buttons a, .top-buttons button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .top-buttons a:hover, .top-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .tabs div {
+            flex: 1;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tabs div:last-child {
+            margin-right: 0;
+        }
+        .tabs div:hover, .tabs div.active {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .download-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .download-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-buttons">
+            <a href="{{ url_for('upload_file') }}">Back to Upload Page</a>
+        </div>
+        <h1>Detection Results</h1>
+        <div class="tabs">
+            <div onclick="showTab('summary')" id="summary-tab" class="active">Summary</div>
+            <div onclick="showTab('report')" id="report-tab">Model Report</div>
+        </div>
+        <div id="summary" class="tab-content active">
+            <h2>Summary</h2>
+            {% for table in tables %}
+                {{ table|safe }}
+            {% endfor %}
+            <a class="download-link" href="{{ url_for('download_file', filename=file_path) }}">Download Excel File</a>
+        </div>
+        <div id="report" class="tab-content">
+            <h2>Model Report</h2>
+            <pre>{{ report }}</pre>
+            <h2>Confusion Matrix</h2>
+            <img src="{{ url_for('static', filename=confusion_matrix_path) }}" alt="Confusion Matrix">
+            <h2>Feature Importance</h2>
+            <img src="{{ url_for('static', filename=feature_importance_path) }}" alt="Feature Importance">
+            <h2>Distribution of Fraudulent vs. Non-Fraudulent Claims</h2>
+            <img src="{{ url_for('static', filename=distribution_path) }}" alt="Distribution of Claims">
+            <a class="download-link" href="{{ url_for('download_report_pdf') }}">Download Model Report as PDF</a>
+        </div>
+    </div>
+    <script>
+        function showTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("tab-content");
+            var tabs = document.getElementsByClassName("tabs")[0].children;
+            for (i = 0; i < x.length; i++) {
+                x[i].classList.remove("active");
+            }
+            for (i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            document.getElementById(tabName + "-tab").classList.add("active");
+        }
+    </script>
+</body>
+</html>
