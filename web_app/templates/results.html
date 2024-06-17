@@ -115,12 +115,12 @@
             <h2>Model Report</h2>
             <pre>{{ report }}</pre>
             <h2>Confusion Matrix</h2>
-            <img src="{{ url_for('static', filename=confusion_matrix_path) }}" alt="Confusion Matrix">
+            <img src="{{ url_for('static', filename='uploads/confusion_matrix.png') }}" alt="Confusion Matrix">
             <h2>Feature Importance</h2>
-            <img src="{{ url_for('static', filename=feature_importance_path) }}" alt="Feature Importance">
+            <img src="{{ url_for('static', filename='uploads/feature_importance.png') }}" alt="Feature Importance">
             <h2>Distribution of Fraudulent vs. Non-Fraudulent Claims</h2>
-            <img src="{{ url_for('static', filename=distribution_path) }}" alt="Distribution of Claims">
-            <a class="download-link" href="{{ url_for('download_report_pdf') }}">Download Model Report as PDF</a>
+            <img src="{{ url_for('static', filename='uploads/distribution.png') }}" alt="Distribution of Claims">
+            <a class="download-link" href="{{ url_for('download_report_pdf', report=report, confusion_matrix_path='uploads/confusion_matrix.png', feature_importance_path='uploads/feature_importance.png', distribution_path='uploads/distribution.png') }}">Download Model Report as PDF</a>
         </div>
     </div>
     <script>

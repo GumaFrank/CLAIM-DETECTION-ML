@@ -24,10 +24,10 @@
     <h1>Model Report</h1>
     <pre>{{ report }}</pre>
     <h2>Confusion Matrix</h2>
-    <img src="{{ confusion_matrix_path }}" alt="Confusion Matrix">
+    <img src="{{ url_for('static', filename=confusion_matrix_path) }}" alt="Confusion Matrix">
     <h2>Feature Importance</h2>
-    <img src="{{ feature_importance_path }}" alt="Feature Importance">
+    <img src="{{ url_for('static', filename=feature_importance_path) }}" alt="Feature Importance">
     <h2>Distribution of Fraudulent vs. Non-Fraudulent Claims</h2>
-    <img src="{{ distribution_path }}" alt="Distribution of Claims">
+    <img src="{{ url_for('static', filename=distribution_path) }}" alt="Distribution of Claims">
 </body>
 </html>
